@@ -2,7 +2,7 @@ import React from "react";
 import { style } from "../../styles/style";
 import { Navbar } from "../../components/nav";
 import { YodaAscii } from "../../components/yoda";
-import { QuestionInput } from "../../components/chats";
+import { PromptInput } from "../../components/chats";
 import { RetroButton } from "../../components/retro";
 
 const DashBoardPage = () => {
@@ -15,7 +15,7 @@ const DashBoardPage = () => {
       <h1 className={`text-black font-silkScreen text-3xl`}>
         Ask questions you shall !
       </h1>
-      <QuestionInput />
+      <PromptInput />
       <div className="w-full flex flex-row items-center justify-center gap-3">
         <RetroButton label={"Create an Image"} />
         <RetroButton label={"Summarize a Text"} />

@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { chatsData } from "../../constant";
 import { Navbar } from "../../components/nav";
-import { ChatBox, QuestionBox, QuestionInput } from "../../components/chats";
+import { ChatBox, QuestionBox, PromptInput } from "../../components/chats";
 
 const ChatPage = () => {
   const { id } = useParams();
@@ -28,7 +28,7 @@ const ChatPage = () => {
           </div>
         ))}
       </div>
-      <QuestionInput position={"sticky bottom-10"} />
+      <PromptInput position={"sticky bottom-10"} />
     </div>
   );
 };

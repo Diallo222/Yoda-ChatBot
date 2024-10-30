@@ -1,5 +1,5 @@
 import ChatList from "./ChatList";
-import QuestionInput from "./QuestionInput";
+import PromptInput from "./PromptInput";
 import ChatBox from "./ChatBox";
 import QuestionBox from "./QuestionBox";
-export { ChatList, QuestionInput, ChatBox, QuestionBox };
+export { ChatList, PromptInput, ChatBox, QuestionBox };
