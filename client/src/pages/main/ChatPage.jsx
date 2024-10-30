@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { chatsData } from "../../constant";
 import { Navbar } from "../../components/nav";
-import { ChatBox, QuestionBox, PromptInput } from "../../components/chats";
+import { ChatBox, PromptBox, PromptInput } from "../../components/chats";
 
 const ChatPage = () => {
   const { id } = useParams();
@@ -23,7 +23,7 @@ const ChatPage = () => {
       <div className="flex flex-col gap-2 w-2/3 md:w-1/2 ">
         {chatDetails.chatList.map((chat, index) => (
           <div key={index} className="flex flex-col w-full ">
-            <QuestionBox userMessage={chat.userMessage} />
+            <PromptBox prompt={chat.userMessage} />
             <ChatBox assistantMessage={chat.assistantMessage} />
           </div>
         ))}

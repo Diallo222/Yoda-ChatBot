@@ -2,10 +2,13 @@ import React, { useState, useRef } from "react";
 import { MdSend, MdStop, MdLink } from "react-icons/md";
 import { Uploader } from "../upload";
 import { IKImage } from "imagekitio-react";
+import { geminiModel } from "../../config";
+import ChatBox from "./ChatBox";
 
 const PromptInput = ({ position }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [answer, setAnswer] = useState("");
   const [image, setImage] = useState({
     isLoading: false,
     error: false,
@@ -18,14 +21,19 @@ const PromptInput = ({ position }) => {
   const handleSubmit = () => {
     if (inputValue.trim() === "") return;
     setIsSubmitting(true);
-    console.log("Submitting question:", inputValue);
+    add(inputValue);
   };
 
   const handleStop = () => {
     setIsSubmitting(false);
-    console.log("Stopped response");
   };
 
+  const add = async (prompt) => {
+    const result = await geminiModel.generateContent(prompt);
+    setAnswer(result.response.text());
+    setIsSubmitting(false);
+    setInputValue("");
+  };
   return (
     <>
       {image.dbData?.filePath && (
@@ -35,6 +43,7 @@ const PromptInput = ({ position }) => {
           className="w-36 h-36 rounded-md object-cover"
         />
       )}
+      <ChatBox assistantMessage={answer} />
       <div
         className={`flex flex-row ${position} items-center gap-3 w-3/4 md:w-1/2 border-stone-700 bg-stone-700 p-2 rounded-full`}
       >
