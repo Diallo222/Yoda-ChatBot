@@ -6,8 +6,15 @@ import { geminiModel } from "../../config";
 import ChatBox from "./ChatBox";
 import PromptBox from "./PromptBox";
 import { YodaAscii } from "../yoda";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { createChat } from "../../store/chats/chatsSlice";
 
 const PromptInput = ({ position }) => {
+  const { data, loading, error } = useSelector(
+    (state) => state.sidebar,
+    shallowEqual
+  );
+  const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [conversations, setConversations] = useState([]);
@@ -31,10 +38,12 @@ const PromptInput = ({ position }) => {
     ],
   });
 
+  console.log("DATA", data, "ERROR", error);
+
   const handleSubmit = async () => {
     if (inputValue.trim() === "") return;
     setIsSubmitting(true);
-
+    dispatch(createChat({ userId: "3S4567", text: inputValue }));
     const newConversation = { prompt: inputValue, answer: "" };
     setConversations([...conversations, newConversation]);
     setInputValue("");
