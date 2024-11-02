@@ -11,16 +11,13 @@ const DashBoardPage = () => {
       className={`flex flex-col mx-auto h-full w-full justify-center items-center gap-6`}
     >
       <Navbar />
-      <YodaAscii />
-      <h1 className={`text-black font-silkScreen text-3xl`}>
-        Ask questions you shall !
-      </h1>
+
       <PromptInput />
-      <div className="w-full flex flex-row items-center justify-center gap-3">
+      {/* <div className="w-full flex flex-row items-center justify-center gap-3">
         <RetroButton label={"Create an Image"} />
         <RetroButton label={"Summarize a Text"} />
         <RetroButton label={"Analyze an Image"} />
-      </div>
+      </div> */}
     </div>
   );
 };
