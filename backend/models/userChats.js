@@ -3,13 +3,14 @@ import mongoose from "mongoose";
 const userChatsSchema = new mongoose.Schema(
   {
     userId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     chats: [
       {
         _id: {
-          type: String,
+          type: mongoose.Schema.Types.ObjectId,
           required: true,
         },
         title: {
@@ -26,5 +27,5 @@ const userChatsSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model.userChatsSchema ||
+export default mongoose.model.UserChats ||
   mongoose.model("userChats", userChatsSchema);

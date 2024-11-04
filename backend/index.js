@@ -3,6 +3,7 @@ import ImageKit from "imagekit";
 import cors from "cors";
 import mongoose from "mongoose";
 import chatRoute from "./routes/chat.route.js";
+import authRoute from "./routes/auth.route.js";
 const port = process.env.PORT || 3000;
 const app = express();
 
@@ -39,6 +40,7 @@ app.use(function (req, res, next) {
 });
 
 app.use("/api/chats", chatRoute);
+app.use("/api/auth", authRoute);
 
 app.get("/api/upload", function (req, res) {
   var result = imagekit.getAuthenticationParameters();

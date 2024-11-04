@@ -26,12 +26,14 @@ export const createChat = async (req, res) => {
           },
         },
       },
-      { upsert: true } // Creates a new document if none exists
+      { upsert: true, new: true }
     );
 
-    res.status(201).send(savedChat._id);
+    res
+      .status(201)
+      .send({ chatId: savedChat._id, message: "Chat created successfully" });
   } catch (error) {
     console.error("Error creating chat:", error);
-    return res.status(500).send({ message: "Failed to create chat", error });
+    res.status(500).send({ message: "Failed to create chat", error });
   }
 };
