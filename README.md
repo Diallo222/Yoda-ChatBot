@@ -30,10 +30,20 @@ yarn install
 
 4. **Start the development server:**
 
+Backend:
+
 ```bash
-npm start
+cd backend && npm start
 # or
-yarn start
+cd backend && yarn start
+```
+
+client:
+
+```bash
+cd client && npm run dev
+# or
+cd client && yarn run dev
 ```
 
 ## Tech Stack
