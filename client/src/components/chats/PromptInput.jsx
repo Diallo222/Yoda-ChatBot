@@ -14,6 +14,7 @@ const PromptInput = ({ position }) => {
     (state) => state.sidebar,
     shallowEqual
   );
+  const { user } = useSelector((state) => state.auth, shallowEqual);
   const dispatch = useDispatch();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -38,12 +39,10 @@ const PromptInput = ({ position }) => {
     ],
   });
 
-  console.log("DATA", data, "ERROR", error);
-
   const handleSubmit = async () => {
     if (inputValue.trim() === "") return;
     setIsSubmitting(true);
-    dispatch(createChat({ userId: "3S4567", text: inputValue }));
+    dispatch(createChat({ userId: user._id, text: inputValue }));
     const newConversation = { prompt: inputValue, answer: "" };
     setConversations([...conversations, newConversation]);
     setInputValue("");

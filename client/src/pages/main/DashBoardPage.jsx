@@ -11,7 +11,6 @@ const DashBoardPage = () => {
       className={`flex flex-col mx-auto h-full w-full justify-center items-center gap-6`}
     >
       <Navbar />
-
       <PromptInput />
       {/* <div className="w-full flex flex-row items-center justify-center gap-3">
         <RetroButton label={"Create an Image"} />

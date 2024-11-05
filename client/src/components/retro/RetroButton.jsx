@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 
-const RetroButton = ({ label, onpress }) => {
+const RetroButton = ({ label, onpress, disabled }) => {
   return (
     <motion.button
       onClick={onpress}
+      disabled={disabled}
       whileTap={{
         scale: 0.975,
       }}

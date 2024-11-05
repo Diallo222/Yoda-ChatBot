@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import SideBarTools from "./SideBarTools";
 import { ChatList } from "../chats";
 import { chatsData, images } from "../../constant";
+import { getAllUserChats } from "../../store/chats/chatsSlice";
 
 const SideBar = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
+  const { user } = useSelector((state) => state.auth, shallowEqual);
+  const { data, loading, error } = useSelector(
+    (state) => state.chats,
+    shallowEqual
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user._id) {
+      dispatch(getAllUserChats({ userId: user._id }));
+    }
+  }, [user]);
+
+  console.log(data);
 
   return (
     <>
@@ -45,13 +60,7 @@ const SideBar = () => {
               <span className="text-left text-md font-silkScreen">Contact</span>
             </motion.button>
           </div>
-          {chatsData.map((period, index) => (
-            <ChatList
-              key={index}
-              chatsPeriod={period.chatsPeriod}
-              chatList={period.chatList}
-            />
-          ))}
+          <ChatList data={data} />
         </motion.div>
       )}
     </>

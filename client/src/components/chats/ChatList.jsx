@@ -1,16 +1,37 @@
 import React from "react";
+import { shallowEqual, useSelector } from "react-redux";
 import ChatItem from "./ChatItem";
+import { format } from "date-fns";
+import { BarLoader } from "../loaders";
 
-const ChatList = ({ chatsPeriod, chatList }) => {
+const ChatList = () => {
+  const { data, loading, error } = useSelector(
+    (state) => state.chats,
+    shallowEqual
+  );
+  if (loading) {
+    <BarLoader />;
+  } else if (!data.length) {
+    return <p className="text-center text-stone-400">No chats available.</p>;
+  }
+
   return (
-    <div className="flex flex-col px-6 py-4 gap-2">
-      <p className="text-md font-silkScreen text-stone-300 mb-2">
-        {chatsPeriod}
-      </p>
-      {chatList.map((chat) => (
-        <ChatItem key={chat.id} id={chat.id} userMessage={chat.userMessage} />
+    <>
+      {data.map((chatList) => (
+        <div
+          className="flex flex-col px-6 py-2 gap-2 border-b border-stone-700"
+          key={chatList._id}
+        >
+          {/* <p className="text-sm text-stone-500">
+            {format(new Date(chatList.createdAt), "PPPpp")}{" "}
+          </p> */}
+          <ChatItem
+            id={chatList._id}
+            userMessage={chatList.title || chatList?.chat?.title}
+          />
+        </div>
       ))}
-    </div>
+    </>
   );
 };
 

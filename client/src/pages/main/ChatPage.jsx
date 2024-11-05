@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { chatsData } from "../../constant";
 import { Navbar } from "../../components/nav";
 import { ChatBox, PromptBox, PromptInput } from "../../components/chats";
+import { getSingleChatById } from "../../store/chats/chatsSlice";
 
 const ChatPage = () => {
   const { id } = useParams();
+  const { user } = useSelector((state) => state.auth, shallowEqual);
+  const { singleChat } = useSelector((state) => state.chats, shallowEqual);
+  const dispatch = useDispatch();
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // });
+
+  useEffect(() => {
+    dispatch(getSingleChatById({ userId: user._id, chatId: id }));
+  }, []);
+
   const chatDetails = findChatById(id);
 
   if (!chatDetails) {

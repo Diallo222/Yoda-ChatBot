@@ -6,6 +6,7 @@ import { YodaAscii } from "../../components/yoda";
 import { style } from "../../styles/style";
 import { useDispatch, shallowEqual, useSelector } from "react-redux";
 import { login } from "../../store/auth/authSlice";
+import { BarLoader } from "../../components/loaders";
 
 const LoginPage = () => {
   const { user, loading, error } = useSelector(
@@ -29,7 +30,15 @@ const LoginPage = () => {
     e.preventDefault();
     dispatch(login({ email, password }));
   };
-  console.log(user, loading, error);
+
+  useEffect(() => {
+    if (error && !loading) {
+      alert("An error occured");
+    }
+    if (user.username) {
+      navToDashboard();
+    }
+  }, [user, loading, error]);
 
   return (
     <div className="h-full w-full min-h-screen flex flex-col justify-center items-center">
@@ -60,7 +69,7 @@ const LoginPage = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <div className="flex items-center justify-between">
+                {/* <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <input type="checkbox" id="remember-me" className="mr-2" />
                     <label
@@ -71,11 +80,23 @@ const LoginPage = () => {
                     </label>
                   </div>
                   <RetroButton label={" Forgot your password?"} />
+                </div> */}
+                <div className="flex justify-center">
+                  {loading ? (
+                    <BarLoader />
+                  ) : (
+                    <AuthButton
+                      onClick={handleSubmit}
+                      disabled={loading}
+                      label={"Login"}
+                    />
+                  )}
                 </div>
-                <AuthButton onClick={handleSubmit} label={"Login"} />
+
                 <div className="mt-4 text-center">
                   <RetroButton
                     onpress={navToRegister}
+                    disabled={loading}
                     label={"Don't have an account? Register Now"}
                   />
                 </div>
