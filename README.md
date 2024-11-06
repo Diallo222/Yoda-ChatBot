@@ -1,6 +1,6 @@
 # Yoda ChatBot
 
-Currently Fighting Sith Errors and Bugs :construction:
+Currently Fighting Sith Errors and Bugs (Project in construction :construction:)
 
 ![Logo](https://preview.redd.it/bnv0jyxlm8j71.png?auto=webp&s=02716b93a0bedca7eeab845cede506e7aff2b646)
 
